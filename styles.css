@@ -86,7 +86,7 @@ body {
   animation: zombie-spin 6s linear infinite;
 }
 
-/* траектория полёта по экрану [web:282][web:286] */
+/* траектория полёта по экрану */
 @keyframes zombie-path {
   0%   { left: 5%;  top: 20%; }
   25%  { left: 80%; top: 15%; }
@@ -95,7 +95,7 @@ body {
   100% { left: 5%;  top: 20%; }
 }
 
-/* вращение зомби вокруг своей оси [web:288] */
+/* вращение зомби вокруг своей оси */
 @keyframes zombie-spin {
   0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -123,30 +123,35 @@ body {
 
 .logo-text {
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   font-size: 13px;
   color: var(--text-muted);
 }
 
-/* Кнопка "Скачать" */
+/* Ссылка на автора в шапке */
 
-.btn-download {
-  padding: 9px 20px;
-  border-radius: 999px;
-  border: none;
-  background: var(--accent);
-  color: #020617;
+.author-link {
   font-size: 14px;
   font-weight: 600;
+  color: var(--accent);
   text-decoration: none;
-  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.35);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.8);
+  transition: background 0.15s ease,
+              transform 0.15s ease,
+              box-shadow 0.15s ease;
 }
 
-.btn-download:hover {
+.author-link:hover {
+  background: rgba(15, 23, 42, 0.95);
   transform: translateY(-1px);
-  box-shadow: 0 18px 45px rgba(56, 189, 248, 0.45);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.95);
 }
 
 /* Центральный блок */
@@ -280,26 +285,60 @@ body {
   color: var(--text-muted);
 }
 
-/* Низ страницы */
+/* Низ страницы и круглая кнопка скачивания */
 
 .bottom-bar {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
-.footer-text {
-  margin: 0;
-  font-size: 14px;
-  color: var(--text-muted);
+/* обёртка кнопки и подписи */
+.download-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
-.footer-text a {
-  color: var(--accent);
+/* Круглая кнопка без текста с радиальным градиентом */
+.btn-download {
+  display: inline-block;
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, #f9fafb, #38bdf8);
+  box-shadow:
+    0 0 20px rgba(56, 189, 248, 0.9),
+    0 18px 45px rgba(15, 23, 42, 0.95);
+  border: none;
+  position: relative;
+  cursor: pointer;
   text-decoration: none;
 }
 
-.footer-text a:hover {
-  text-decoration: underline;
+.btn-download::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: inherit;
+  background: radial-gradient(circle at 30% 20%, rgba(248, 250, 252, 0.9), transparent);
+  opacity: 0.9;
+}
+
+.btn-download:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow:
+    0 0 26px rgba(56, 189, 248, 1),
+    0 24px 60px rgba(15, 23, 42, 1);
+}
+
+/* подпись под шаром */
+.download-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* Адаптация под мобильные */
@@ -318,12 +357,12 @@ body {
     border-radius: 24px;
   }
 
-  .btn-download {
-    padding: 8px 16px;
-    font-size: 13px;
-  }
-
   .calendar-row {
     gap: 18px;
+  }
+
+  .author-link {
+    font-size: 13px;
+    padding: 5px 12px;
   }
 }
