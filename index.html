@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>NarkskorCalendar — стеклянный календарь 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Анимированный тёмный фон -->
+  <div class="bg-layer"></div>
+
+  <!-- Летающий зомби в скафандре поверх фона -->
+  <div class="zombie-float">
+    <img src="img/zombie.png" alt="Летающий зомби в скафандре">
+  </div>
+
+  <main class="page">
+    <!-- Верхняя панель с кнопкой "Скачать" -->
+    <header class="top-bar">
+      <div class="logo-text">NarkskorCalendar</div>
+      <a href="calendar.zip" class="btn-download">Скачать</a>
+    </header>
+
+    <!-- Центр: заголовок + два стеклянных календаря -->
+    <section class="center-block">
+      <header class="hero-text">
+        <h1>NarkskorCalendar — стеклянный календарь\планировщик 2026</h1>
+        <p>
+          Мини-виджет и полноразмерный календарь с анимированным фоном.
+          Идеален для рабочего стола и виджетов в минималистичном стиле.
+        </p>
+      </header>
+
+      <div class="calendar-row">
+        <!-- Левый: мини‑виджет -->
+        <div class="calendar-column">
+          <h2 class="calendar-title">Мини-виджет</h2>
+          <div class="mini-card">
+            <img class="mini-card__image"
+                 src="img/calendarmini.png"
+                 alt="Мини-виджет календаря" />
+          </div>
+        </div>
+
+        <!-- Правый: полный календарь -->
+        <div class="calendar-column">
+          <h2 class="calendar-title">Полный календарь</h2>
+          <div class="full-card">
+            <img class="full-card__image"
+                 src="img/calendar.png"
+                 alt="Полный календарь 2026" />
+          </div>
+        </div>
+      </div>
+
+      <p class="subtitle">
+        Авторский календарь\планировщик.Тёмная тема, стекло, плавные анимации и подсвеченные важные даты.Возможно загружать анифированный фон (GIF\VIDEO)
+      </p>
+    </section>
+
+    <!-- Низ страницы: подпись / контакт -->
+    <footer class="bottom-bar">
+      <p class="footer-text">
+        Подпишись на АВТОРА: <a href="https://t.me/narkskor" target="_blank" rel="noopener">@Narkskor</a>
+      </p>
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,329 @@
+:root {
+  --text-main: #f9fafb;
+  --text-muted: #cbd5f5;
+  --accent: #38bdf8;
+  --glass-bg: rgba(15, 17, 23, 0.75);
+}
+
+/* Сброс бокс-модели */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-main);
+  background: #050507;
+}
+
+/* Плавно анимированный тёмный фон */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+
+  background:
+    radial-gradient(circle at 0% 0%,
+                    rgba(148, 163, 184, 0.18), transparent 55%),
+    radial-gradient(circle at 100% 100%,
+                    rgba(75, 85, 99, 0.20), transparent 55%),
+    url("img/bg.jpg") center/cover no-repeat;
+
+  background-size:
+    200% 200%,
+    200% 200%,
+    cover;
+
+  background-position:
+    0% 0%,
+    100% 100%,
+    center;
+
+  filter: saturate(0.9) brightness(0.85);
+  animation: glow-move 18s ease-in-out infinite alternate;
+}
+
+@keyframes glow-move {
+  0% {
+    background-position:
+      0% 0%,
+      100% 100%,
+      center;
+  }
+  50% {
+    background-position:
+      40% 20%,
+      60% 80%,
+      center;
+  }
+  100% {
+    background-position:
+      80% 60%,
+      20% 40%,
+      center;
+  }
+}
+
+/* Летающий по экрану и вращающийся зомби */
+
+.zombie-float {
+  position: fixed;
+  width: 90px;
+  height: 90px;
+  pointer-events: none;
+  z-index: -1;                 /* поставь 5, если нужно поверх карточек */
+  animation: zombie-path 20s linear infinite;
+}
+
+.zombie-float img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: zombie-spin 6s linear infinite;
+}
+
+/* траектория полёта по экрану [web:282][web:286] */
+@keyframes zombie-path {
+  0%   { left: 5%;  top: 20%; }
+  25%  { left: 80%; top: 15%; }
+  50%  { left: 85%; top: 75%; }
+  75%  { left: 10%; top: 80%; }
+  100% { left: 5%;  top: 20%; }
+}
+
+/* вращение зомби вокруг своей оси [web:288] */
+@keyframes zombie-spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Общий лэйаут */
+
+.page {
+  min-height: 100vh;
+  padding: 24px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Верхняя панель */
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto 16px;
+}
+
+.logo-text {
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Кнопка "Скачать" */
+
+.btn-download {
+  padding: 9px 20px;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  color: #020617;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-download:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 45px rgba(56, 189, 248, 0.45);
+}
+
+/* Центральный блок */
+
+.center-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+  padding: 10px 0;
+}
+
+/* Заголовок */
+
+.hero-text {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.hero-text h1 {
+  margin: 0 0 8px;
+  font-size: clamp(26px, 3.6vw, 34px);
+  font-weight: 600;
+}
+
+.hero-text p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+/* Ряд с двумя календарями */
+
+.calendar-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.calendar-column {
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.calendar-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* Мини‑виджет */
+
+.mini-card {
+  width: 260px;
+  height: 260px;
+  padding: 0;
+  border-radius: 32px;
+  background: var(--glass-bg);
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+}
+
+.mini-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Полный календарь */
+
+.full-card {
+  width: 700px;
+  max-width: 100%;
+  padding: 0;
+  border-radius: 32px;
+  background: var(--glass-bg);
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.full-card__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 32px;
+}
+
+/* Hover‑эффект */
+
+.mini-card,
+.full-card {
+  transition: transform 0.18s ease,
+              box-shadow 0.18s ease,
+              border-color 0.18s ease,
+              background 0.18s ease;
+}
+
+.mini-card:hover,
+.full-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95);
+  border-color: rgba(148, 163, 184, 0.9);
+  background: rgba(18, 20, 28, 0.85);
+}
+
+/* Описание */
+
+.subtitle {
+  max-width: 820px;
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+/* Низ страницы */
+
+.bottom-bar {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer-text {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.footer-text a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.footer-text a:hover {
+  text-decoration: underline;
+}
+
+/* Адаптация под мобильные */
+
+@media (max-width: 800px) {
+  .page {
+    padding: 16px 12px 16px;
+  }
+
+  .full-card {
+    width: 100%;
+    border-radius: 24px;
+  }
+
+  .full-card__image {
+    border-radius: 24px;
+  }
+
+  .btn-download {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .calendar-row {
+    gap: 18px;
+  }
+}
